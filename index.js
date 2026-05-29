@@ -6,7 +6,6 @@ import chalk from "chalk";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import basicAuth from "express-basic-auth";
 import bareMuxNode from "@mercuryworkshop/bare-mux/node";
 import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 import mime from "mime";
@@ -29,16 +28,70 @@ const CACHE_TTL = 30 * 24 * 60 * 60 * 1000; // Cache for 30 Days
 wisp.options.allow_loopback_ips = true;
 wisp.options.allow_private_ips = true;
 
+const AUTH_COOKIE_NAME = "interstellar_auth";
+const AUTH_COOKIE_OPTIONS = {
+  httpOnly: true,
+  sameSite: "strict",
+};
+
+function isLoggedIn(req) {
+  return req.cookies[AUTH_COOKIE_NAME] === "true";
+}
+
+function routeNeedsAuth(req) {
+  const allowedPaths = ["/login", "/logout", "/e/", "/ca", "/bm", "/ep"];
+  const path = req.path;
+  if (path === "/" || ["/b", "/a", "/play.html", "/c", "/d"].includes(path)) {
+    return true;
+  }
+  if (path.startsWith("/assets/") || path.startsWith("/static/")) {
+    return false;
+  }
+  return !allowedPaths.some(p => path === p || path.startsWith(p));
+}
+
 if (config.challenge !== false) {
   console.log(chalk.green("🔒 Password protection is enabled! Listing logins below"));
-  console.log(chalk.green(`Probably won'r work tho. `))
+  console.log(chalk.green(`Probably won'r work tho. `));
   console.log(chalk.bold(`=======================================================================`));
   // biome-ignore lint: idk
   Object.entries(config.users).forEach(([username, password]) => {
     console.log(chalk.blue(`Username: ${username}, Password: ${password}`));
   });
-  app.use(basicAuth({ users: config.users, challenge: true }));
 }
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "static", "login.html"));
+});
+
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  if (config.users[username] && config.users[username] === password) {
+    res.cookie(AUTH_COOKIE_NAME, "true", AUTH_COOKIE_OPTIONS);
+    return res.redirect("/");
+  }
+  return res.status(401).redirect("/login?error=1");
+});
+
+app.get("/logout", (req, res) => {
+  res.clearCookie(AUTH_COOKIE_NAME, AUTH_COOKIE_OPTIONS);
+  res.redirect("/login");
+});
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  if (!config.challenge) return next();
+  if (!routeNeedsAuth(req)) return next();
+  if (isLoggedIn(req)) return next();
+  return res.redirect("/login");
+});
 
 app.get("/e/*", async (req, res, next) => {
   try {
@@ -89,10 +142,6 @@ app.get("/e/*", async (req, res, next) => {
     res.status(500).send("Error fetching the asset");
   }
 });
-
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 /* if (process.env.MASQR === "true") {
   console.log(chalk.green("Masqr is enabled"));
@@ -158,7 +207,7 @@ server.on("upgrade", (req, socket, head) => {
 
 server.on("listening", () => {
   console.log(chalk.green(`🌍 Server is running on http://localhost:${PORT}. Really won't really work cuz Im on codespaces. `));
-  console.log(chalk.yellow(`Also on https://legendary-robot-r4j7rrx6xxx5fpvj9-8080.app.github.dev/ For online use. `));
+  console.log(chalk.yellow(`Also available through your Codespaces preview if port ${PORT} is forwarded.`));
   console.log(chalk.bold(`=======================================================================`));
   console.log(chalk.inverse(`Server will automatically stop after 5 minutes of inactivity, or if the process is killed.`));
   console.log(chalk.bold(`=======================================================================`));
