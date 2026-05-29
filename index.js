@@ -21,13 +21,7 @@ const server = http.createServer();
 const app = express();
 const bareServer = createBareServer("/ca/");
 const { baremuxPath } = bareMuxNode;
-const epoxyDistPath = path.join(
-  __dirname,
-  "node_modules",
-  "@mercuryworkshop",
-  "epoxy-transport",
-  "dist",
-);
+const epoxyDistPath = path.join(__dirname, "node_modules", "@mercuryworkshop", "epoxy-transport", "dist");
 const PORT = process.env.PORT || 8080;
 const cache = new Map();
 const CACHE_TTL = 30 * 24 * 60 * 60 * 1000; // Cache for 30 Days
@@ -163,6 +157,7 @@ server.on("upgrade", (req, socket, head) => {
 server.on("listening", () => {
   console.log(chalk.green(`🌍 Server is running on http://localhost:${PORT}. Really won't really work cuz Im on codespaces. `));
   console.log(chalk.yellow(`Also on https://legendary-robot-r4j7rrx6xxx5fpvj9-8080.app.github.dev/ For online use. `));
+  console.log(chalk.inverse(`Server will automatically stop after 5 minutes of inactivity, or if the process is killed.`));
 });
 
 server.listen({ port: PORT });
