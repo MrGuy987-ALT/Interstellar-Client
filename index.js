@@ -161,6 +161,7 @@ server.on("listening", () => {
   console.log(chalk.yellow(`Also on https://legendary-robot-r4j7rrx6xxx5fpvj9-8080.app.github.dev/ For online use. `));
   console.log(chalk.bold(`=======================================================================`));
   console.log(chalk.inverse(`Server will automatically stop after 5 minutes of inactivity, or if the process is killed.`));
+  console.log(chalk.bold(`=======================================================================`));
 });
 
 server.listen({ port: PORT });
