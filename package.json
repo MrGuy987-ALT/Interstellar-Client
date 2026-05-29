@@ -8,12 +8,12 @@
   },
   "scripts": {
     "start": "node index.js",
-    "close": "sh -c \"pkill -f 'node index.js'; exit 0\"",
+    "close": "pkill -9 -f 'node index.js' 2>/dev/null || true",
     "format": "pnpm biome format --write .",
     "precommit": "pnpm run format && pnpm biome check --write .",
     "lint": "biome lint --write ."
   },
-  "author": "InterstellarNetwork",
+  "author": "MrGuy987",
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "@mercuryworkshop/bare-mux": "^2.1.8",
