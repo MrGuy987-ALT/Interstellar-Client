@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interstellar Login</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, sans-serif;
+            background: #090b12;
+            color: #f8fafc;
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            width: min(400px, calc(100vw - 32px));
+            padding: 28px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+            backdrop-filter: blur(16px);
+        }
+
+        h1 {
+            margin: 0 0 18px;
+            font-size: 1.8rem;
+        }
+
+        label {
+            display: block;
+            margin: 14px 0 6px;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.9);
+            color: #f8fafc;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px 14px;
+            border: none;
+            border-radius: 12px;
+            background: #5b93ff;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .error {
+            margin-top: 14px;
+            color: #fecaca;
+            font-size: 0.95rem;
+        }
+
+        .hint {
+            margin-top: 8px;
+            color: #94a3b8;
+            font-size: 0.92rem;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="login-card">
+        <h1>Interstellar Login</h1>
+        <form method="POST" action="/login">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" autocomplete="username" required />
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required />
+            <button type="submit">Sign In</button>
+        </form>
+        <p class="hint">You must sign in before you can access the page.</p>
+        <p class="error" id="error" hidden>Invalid username or password.</p>
+    </main>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('error')) {
+            document.getElementById('error').hidden = false;
+        }
+    </script>
+</body>
+
+</html>
