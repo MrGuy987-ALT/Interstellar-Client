@@ -9,6 +9,8 @@
   "scripts": {
     "start": "node index.js",
     "close": "pkill -9 -f 'node index.js' 2>/dev/null || true",
+    "shut-down": "pkill -9 -f 'node index.js' 2>/dev/null || true",
+    "stop": "pkill -9 -f 'node index.js' 2>/dev/null || true",
     "format": "pnpm biome format --write .",
     "precommit": "pnpm run format && pnpm biome check --write .",
     "lint": "biome lint --write ."
