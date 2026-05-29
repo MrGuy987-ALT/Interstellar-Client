@@ -159,6 +159,7 @@ server.on("upgrade", (req, socket, head) => {
 server.on("listening", () => {
   console.log(chalk.green(`🌍 Server is running on http://localhost:${PORT}. Really won't really work cuz Im on codespaces. `));
   console.log(chalk.yellow(`Also on https://legendary-robot-r4j7rrx6xxx5fpvj9-8080.app.github.dev/ For online use. `));
+  console.log(chalk.bold(`=======================================================================`));
   console.log(chalk.inverse(`Server will automatically stop after 5 minutes of inactivity, or if the process is killed.`));
 });
 
