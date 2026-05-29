@@ -31,6 +31,8 @@ wisp.options.allow_private_ips = true;
 
 if (config.challenge !== false) {
   console.log(chalk.green("🔒 Password protection is enabled! Listing logins below"));
+  console.log(chalk.green(`Probably won'r work tho. `))
+  console.log(chalk.bold(`=======================================================================`));
   // biome-ignore lint: idk
   Object.entries(config.users).forEach(([username, password]) => {
     console.log(chalk.blue(`Username: ${username}, Password: ${password}`));
