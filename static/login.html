@@ -18,7 +18,7 @@
         }
 
         .login-card {
-            width: min(400px, calc(100vw - 32px));
+            width: clamp(320px, 90vw, 450px);
             padding: 28px;
             border-radius: 18px;
             background: rgba(255, 255, 255, 0.06);
@@ -61,6 +61,12 @@
             cursor: pointer;
         }
 
+        .small-note {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
         .error {
             margin-top: 14px;
             color: #fecaca;
@@ -83,9 +89,10 @@
             <input id="username" name="username" type="text" autocomplete="username" required />
             <label for="password">Password</label>
             <input id="password" name="password" type="password" autocomplete="current-password" required />
-            <button type="submit">Sign In</button>
+            <button id="submitButton" type="submit">Sign In</button>
         </form>
         <p class="hint">You must sign in before you can access the page.</p>
+        <p class="small-note">Press Enter on any field to submit like a secondary OK button.</p>
         <p class="error" id="error" hidden>Invalid username or password.</p>
     </main>
     <script>
@@ -93,6 +100,14 @@
         if (params.get('error')) {
             document.getElementById('error').hidden = false;
         }
+
+        const form = document.querySelector('form');
+        form.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                form.submit();
+            }
+        });
     </script>
 </body>
 
