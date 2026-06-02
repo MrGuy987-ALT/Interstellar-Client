@@ -200,22 +200,49 @@ function updateHeadSection(selectedValue) {
 document.addEventListener("DOMContentLoaded", () => {
   const saveButton = document.getElementById("save-button");
   const backgroundInput = document.getElementById("background-input");
+  const backgroundFileInput = document.getElementById("background-file-input");
   const resetButton = document.getElementById("reset-button");
 
+  function applyBackground(imageURL) {
+    localStorage.setItem("backgroundImage", imageURL);
+    document.body.style.backgroundImage = `url('${imageURL}')`;
+  }
+
   saveButton.addEventListener("click", () => {
-    const imageURL = backgroundInput.value;
-    if (imageURL.trim() !== "") {
-      localStorage.setItem("backgroundImage", imageURL);
-      document.body.style.backgroundImage = `url('${imageURL}')`;
+    const imageURL = backgroundInput.value.trim();
+    if (imageURL !== "") {
+      applyBackground(imageURL);
       backgroundInput.value = "";
+      backgroundFileInput.value = "";
     } else {
       console.log("No image URL entered.");
     }
   });
 
+  backgroundFileInput.addEventListener("change", event => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Please select a valid image file.");
+      backgroundFileInput.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageDataUrl = reader.result;
+      if (typeof imageDataUrl === "string") {
+        applyBackground(imageDataUrl);
+        backgroundInput.value = "";
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+
   resetButton.addEventListener("click", () => {
     localStorage.removeItem("backgroundImage");
-    document.body.style.backgroundImage = "url('default-background.jpg')";
+    document.body.style.backgroundImage = "";
     window.location.reload();
   });
 });
