@@ -1,0 +1,541 @@
+/* Customizable Homepage Widgets */
+
+.widgets-container {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   gap: 20px;
+   padding: 20px;
+   max-width: 1400px;
+   margin: 0 auto;
+   width: 100%;
+}
+
+.widget {
+   background-color: var(--background-column);
+   border-radius: 12px;
+   padding: 20px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   transition: all 0.3s ease;
+   cursor: grab;
+   min-height: 200px;
+   display: flex;
+   flex-direction: column;
+   position: relative;
+}
+
+.widget:hover {
+   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+   transform: translateY(-2px);
+}
+
+.widget.sortable-ghost {
+   opacity: 0.4;
+   background-color: var(--background-settings);
+}
+
+.widget-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 15px;
+   border-bottom: 1px solid var(--text-placeholder);
+   padding-bottom: 10px;
+}
+
+.widget-title {
+   font-size: 18px;
+   font-weight: 600;
+   color: var(--text-primary);
+   margin: 0;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+}
+
+.widget-icon {
+   font-size: 20px;
+   color: var(--save-button);
+}
+
+.widget-controls {
+   display: flex;
+   gap: 8px;
+}
+
+.widget-btn {
+   background: none;
+   border: none;
+   color: var(--text-placeholder);
+   cursor: pointer;
+   font-size: 14px;
+   padding: 4px 8px;
+   border-radius: 4px;
+   transition: all 0.2s ease;
+}
+
+.widget-btn:hover {
+   color: var(--text-primary);
+   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.widget-content {
+   flex: 1;
+   overflow-y: auto;
+}
+
+/* Widget specific styles */
+
+/* Search Widget */
+.search-widget input {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid var(--text-placeholder);
+   border-radius: 6px;
+   background-color: var(--background-input);
+   color: var(--text-primary);
+   font-size: 14px;
+   margin-bottom: 10px;
+}
+
+.search-widget input:focus {
+   outline: none;
+   border-color: var(--save-button);
+   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+/* Quick Links Widget */
+.quick-links-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+   gap: 10px;
+}
+
+.quick-link-item {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 12px;
+   background-color: var(--background-buttons);
+   border-radius: 8px;
+   text-decoration: none;
+   color: var(--text-primary);
+   transition: all 0.2s ease;
+   border: 1px solid transparent;
+   cursor: pointer;
+}
+
+.quick-link-item:hover {
+   background-color: var(--tab-active-background);
+   border-color: var(--save-button);
+}
+
+.quick-link-icon {
+   font-size: 24px;
+   margin-bottom: 5px;
+}
+
+.quick-link-name {
+   font-size: 12px;
+   text-align: center;
+   word-break: break-word;
+}
+
+/* Apps/Games Widget */
+.apps-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+   gap: 12px;
+}
+
+.app-item {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 10px;
+   background-color: var(--background-buttons);
+   border-radius: 8px;
+   text-decoration: none;
+   color: var(--text-primary);
+   transition: all 0.2s ease;
+   cursor: pointer;
+}
+
+.app-item:hover {
+   background-color: var(--tab-active-background);
+   transform: scale(1.05);
+}
+
+.app-icon {
+   width: 60px;
+   height: 60px;
+   border-radius: 6px;
+   margin-bottom: 8px;
+   object-fit: cover;
+}
+
+.app-name {
+   font-size: 11px;
+   text-align: center;
+   word-break: break-word;
+   max-height: 2.2em;
+   overflow: hidden;
+   line-height: 1.1em;
+}
+
+/* Recent Apps Widget */
+.recent-apps-list {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.recent-app-item {
+   display: flex;
+   align-items: center;
+   padding: 12px;
+   background-color: var(--background-buttons);
+   border-radius: 6px;
+   text-decoration: none;
+   color: var(--text-primary);
+   transition: all 0.2s ease;
+   cursor: pointer;
+}
+
+.recent-app-item:hover {
+   background-color: var(--tab-active-background);
+}
+
+.recent-app-icon {
+   width: 40px;
+   height: 40px;
+   border-radius: 4px;
+   margin-right: 12px;
+   object-fit: cover;
+}
+
+.recent-app-info {
+   flex: 1;
+}
+
+.recent-app-name {
+   font-size: 14px;
+   font-weight: 500;
+   margin: 0;
+}
+
+.recent-app-time {
+   font-size: 12px;
+   color: var(--text-placeholder);
+   margin: 2px 0 0 0;
+}
+
+/* Favorites Widget */
+.favorites-list {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.favorite-item {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 12px;
+   background-color: var(--background-buttons);
+   border-radius: 6px;
+   text-decoration: none;
+   color: var(--text-primary);
+   transition: all 0.2s ease;
+}
+
+.favorite-item:hover {
+   background-color: var(--tab-active-background);
+}
+
+.favorite-item-info {
+   display: flex;
+   align-items: center;
+   flex: 1;
+   gap: 10px;
+}
+
+.favorite-item-icon {
+   width: 36px;
+   height: 36px;
+   border-radius: 4px;
+   object-fit: cover;
+}
+
+.favorite-item-name {
+   font-size: 14px;
+   font-weight: 500;
+}
+
+.favorite-remove-btn {
+   background: none;
+   border: none;
+   color: var(--reset-button);
+   cursor: pointer;
+   font-size: 16px;
+   padding: 4px 8px;
+}
+
+/* Stats Widget */
+.stats-grid {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 12px;
+}
+
+.stat-item {
+   background-color: var(--background-buttons);
+   padding: 15px;
+   border-radius: 6px;
+   text-align: center;
+}
+
+.stat-value {
+   font-size: 24px;
+   font-weight: 700;
+   color: var(--save-button);
+   margin: 0;
+}
+
+.stat-label {
+   font-size: 12px;
+   color: var(--text-placeholder);
+   margin: 5px 0 0 0;
+}
+
+/* Empty State */
+.widget-empty {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   padding: 30px 20px;
+   color: var(--text-placeholder);
+   text-align: center;
+}
+
+.widget-empty-icon {
+   font-size: 40px;
+   margin-bottom: 10px;
+   opacity: 0.5;
+}
+
+.widget-empty-text {
+   font-size: 14px;
+   margin: 0;
+}
+
+/* Widget Management Toolbar */
+.widgets-toolbar {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 20px;
+   background-color: var(--background-nav);
+   backdrop-filter: var(--backdrop-filter);
+   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+   position: sticky;
+   top: 0;
+   z-index: 100;
+}
+
+.widgets-toolbar-title {
+   font-size: 18px;
+   font-weight: 600;
+   color: var(--text-primary);
+   margin: 0;
+}
+
+.widgets-toolbar-buttons {
+   display: flex;
+   gap: 10px;
+}
+
+.toolbar-btn {
+   padding: 10px 16px;
+   border: none;
+   border-radius: 6px;
+   background-color: var(--background-buttons);
+   color: var(--text-primary);
+   cursor: pointer;
+   font-size: 14px;
+   font-weight: 500;
+   transition: all 0.2s ease;
+}
+
+.toolbar-btn:hover {
+   background-color: var(--tab-active-background);
+}
+
+.toolbar-btn.primary {
+   background-color: var(--save-button);
+   color: white;
+}
+
+.toolbar-btn.primary:hover {
+   opacity: 0.9;
+}
+
+/* Widget Manager Modal */
+.widget-manager-modal {
+   display: none;
+   position: fixed;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: rgba(0, 0, 0, 0.5);
+   z-index: 1000;
+   align-items: center;
+   justify-content: center;
+}
+
+.widget-manager-modal.active {
+   display: flex;
+}
+
+.widget-manager-content {
+   background-color: var(--background-color);
+   border-radius: 12px;
+   padding: 30px;
+   max-width: 500px;
+   width: 90%;
+   max-height: 80vh;
+   overflow-y: auto;
+   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.widget-manager-title {
+   font-size: 20px;
+   font-weight: 600;
+   color: var(--text-primary);
+   margin: 0 0 20px 0;
+}
+
+.widget-manager-list {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+}
+
+.widget-manager-item {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 12px;
+   background-color: var(--background-settings);
+   border-radius: 6px;
+}
+
+.widget-manager-item-name {
+   font-size: 14px;
+   color: var(--text-primary);
+   font-weight: 500;
+}
+
+.widget-toggle {
+   width: 40px;
+   height: 24px;
+   background-color: #ccc;
+   border-radius: 12px;
+   position: relative;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+.widget-toggle.active {
+   background-color: var(--save-button);
+}
+
+.widget-toggle-circle {
+   width: 20px;
+   height: 20px;
+   background-color: white;
+   border-radius: 50%;
+   position: absolute;
+   top: 2px;
+   left: 2px;
+   transition: left 0.3s ease;
+}
+
+.widget-toggle.active .widget-toggle-circle {
+   left: 18px;
+}
+
+.widget-manager-buttons {
+   display: flex;
+   gap: 10px;
+   margin-top: 20px;
+}
+
+.widget-manager-buttons button {
+   flex: 1;
+   padding: 10px 16px;
+   border: none;
+   border-radius: 6px;
+   cursor: pointer;
+   font-size: 14px;
+   font-weight: 500;
+   transition: all 0.2s ease;
+}
+
+.widget-manager-buttons .btn-save {
+   background-color: var(--save-button);
+   color: white;
+}
+
+.widget-manager-buttons .btn-cancel {
+   background-color: var(--background-buttons);
+   color: var(--text-primary);
+}
+
+.widget-manager-buttons .btn-save:hover {
+   opacity: 0.9;
+}
+
+.widget-manager-buttons .btn-cancel:hover {
+   background-color: var(--tab-active-background);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+   .widgets-container {
+      grid-template-columns: 1fr;
+      gap: 15px;
+      padding: 15px;
+   }
+
+   .widget {
+      min-height: 150px;
+   }
+
+   .quick-links-grid {
+      grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+   }
+
+   .apps-grid {
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+   }
+
+   .stats-grid {
+      grid-template-columns: 1fr;
+   }
+
+   .widgets-toolbar {
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+   }
+
+   .widgets-toolbar-buttons {
+      width: 100%;
+   }
+
+   .toolbar-btn {
+      flex: 1;
+   }
+}

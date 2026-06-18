@@ -488,6 +488,15 @@ function toggleThemeMode() {
   applyThemeMode();
 }
 
+function toggleCustomizeHomepage() {
+  const switchElement = document.getElementById("customize-homepage-switch");
+  const labelElement = document.getElementById("customize-label");
+  const isEnabled = switchElement.checked;
+
+  localStorage.setItem("customizeHomepage", isEnabled ? "true" : "false");
+  labelElement.textContent = isEnabled ? "Enabled" : "Disabled";
+}
+
 // Initialize theme mode on page load
 document.addEventListener("DOMContentLoaded", () => {
   const isLightMode = localStorage.getItem("lightMode") === "true";
@@ -500,4 +509,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   applyThemeMode();
+
+  // Initialize customize homepage toggle
+  const customizeSwitch = document.getElementById("customize-homepage-switch");
+  const customizeLabel = document.getElementById("customize-label");
+
+  if (customizeSwitch) {
+    const isCustomizeEnabled = localStorage.getItem("customizeHomepage") === "true";
+    customizeSwitch.checked = isCustomizeEnabled;
+    customizeLabel.textContent = isCustomizeEnabled ? "Enabled" : "Disabled";
+  }
 });
