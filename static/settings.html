@@ -24,6 +24,17 @@
   <div class="main">
     <div class="settings-container">
       <div class="settings-card">
+        <h3>Theme Mode</h3>
+        <p>Toggle between dark and light mode for comfortable viewing.</p>
+        <div id="theme-settings">
+          <label class="switch">
+            <input type="checkbox" id="theme-mode-switch" class="slider-checkbox" onchange="toggleThemeMode()" />
+            <span class="slider-round"></span>
+          </label>
+          <span id="theme-label" style="margin-left: 10px; font-weight: 500;">Dark Mode</span>
+        </div>
+      </div>
+      <div class="settings-card">
         <h3>About:Blank</h3>
         <p>
           Cloak the site in an about:blank page and toggle about:blank on

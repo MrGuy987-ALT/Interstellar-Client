@@ -456,3 +456,48 @@ function importSaveData() {
   };
   input.click();
 }
+
+// Theme Mode Toggle
+function applyThemeMode() {
+  const isLightMode = localStorage.getItem("lightMode") === "true";
+  const themeLinkId = "light-mode-theme";
+  let themeLink = document.getElementById(themeLinkId);
+
+  if (isLightMode) {
+    if (!themeLink) {
+      themeLink = document.createElement("link");
+      themeLink.id = themeLinkId;
+      themeLink.rel = "stylesheet";
+      themeLink.href = "/assets/css/light-mode.css?v=01";
+      document.head.appendChild(themeLink);
+    }
+  } else {
+    if (themeLink) {
+      themeLink.remove();
+    }
+  }
+}
+
+function toggleThemeMode() {
+  const switchElement = document.getElementById("theme-mode-switch");
+  const labelElement = document.getElementById("theme-label");
+  const isLightMode = switchElement.checked;
+
+  localStorage.setItem("lightMode", isLightMode ? "true" : "false");
+  labelElement.textContent = isLightMode ? "Light Mode" : "Dark Mode";
+  applyThemeMode();
+}
+
+// Initialize theme mode on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const isLightMode = localStorage.getItem("lightMode") === "true";
+  const switchElement = document.getElementById("theme-mode-switch");
+  const labelElement = document.getElementById("theme-label");
+
+  if (switchElement) {
+    switchElement.checked = isLightMode;
+    labelElement.textContent = isLightMode ? "Light Mode" : "Dark Mode";
+  }
+
+  applyThemeMode();
+});

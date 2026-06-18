@@ -1,0 +1,126 @@
+/* Light Mode Theme */
+
+:root {
+   /* Background Variables */
+   --background-image: url("/./assets/media/background/full-main.png");
+   --backdrop-filter: blur(10px) brightness(120%);
+   --background-nav: rgba(0, 0, 0, 0.05);
+   --background-color: #f5f5f5;
+   --background-input: #e8e8e8;
+   --background-column: #e0e0e0;
+   --background-settings: #eeeeee;
+   --background-buttons: #e0e0e0;
+   --tab-active-background: #d0d0d0;
+   --tab-inactive-background: ;
+   --slider-active-background: #4caf50;
+   --slider-inactive-background: #999;
+   --nav-image: url("/./assets/media/favicon/main.png");
+
+   /* Text Variables */
+   --text-primary: #000;
+   --text-dark: #666;
+   --text-placeholder: #888;
+
+   /* Other Variables */
+   --save-button: #4caf50;
+   --reset-button: #f44336;
+   --import-button: #009688;
+   --export-button: #ea76cb;
+}
+
+/* Light mode overrides for better readability */
+body {
+   background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+::-webkit-scrollbar-thumb {
+   background-color: #999;
+}
+
+::-webkit-scrollbar-thumb:hover {
+   background-color: #666;
+}
+
+/* Input styles for light mode */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+   background-color: var(--background-input) !important;
+   color: var(--text-primary) !important;
+   border: 1px solid #d0d0d0;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+   background-color: #fff !important;
+   border-color: #999;
+   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styles */
+button,
+.key-button {
+   background-color: var(--background-buttons) !important;
+   color: var(--text-primary) !important;
+   border: 1px solid #ccc;
+}
+
+button:hover,
+.key-button:hover {
+   background-color: #d0d0d0 !important;
+}
+
+/* Settings card */
+.settings-card {
+   background-color: var(--background-settings) !important;
+   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation */
+.f-nav {
+   background-color: rgba(255, 255, 255, 0.85) !important;
+   border-bottom: 1px solid #e0e0e0;
+}
+
+/* Dropdown/Select */
+.dropdown,
+select {
+   background-color: var(--background-input) !important;
+   color: var(--text-primary) !important;
+}
+
+/* Slider styling */
+.slider {
+   background-color: var(--slider-inactive-background);
+}
+
+.slider-checkbox:checked + .slider-round {
+   background-color: var(--slider-active-background);
+}
+
+/* Container backgrounds */
+.container,
+.search-container {
+   background-color: transparent;
+}
+
+/* Text contrast enhancements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   color: var(--text-primary) !important;
+}
+
+p {
+   color: var(--text-dark) !important;
+}

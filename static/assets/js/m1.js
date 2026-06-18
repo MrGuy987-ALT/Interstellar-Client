@@ -64,6 +64,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.head.appendChild(customThemeEle);
   }
 
+  // Light/Dark Mode Toggle
+  const isLightMode = localStorage.getItem("lightMode") === "true";
+  if (isLightMode) {
+    const lightThemeLink = document.createElement("link");
+    lightThemeLink.id = "light-mode-theme";
+    lightThemeLink.rel = "stylesheet";
+    lightThemeLink.href = "/assets/css/light-mode.css?v=01";
+    document.head.appendChild(lightThemeLink);
+  }
+
   // Favicon and Name Logic
   const icon = document.getElementById("tab-favicon");
   const name = document.getElementById("t");
